@@ -9,7 +9,6 @@ import { Reflector } from "@nestjs/core";
 import { ROLES_KEY } from "../decorators/roles.decorator";
 import { UserRole } from "../../users/constants/user-roles.constant";
 import { AuthenticatedUser } from "../auth.types";
-import { PATH_METADATA } from "@nestjs/common/constants";
 import { isAdminController } from "./admin-route.util";
 
 @Injectable()

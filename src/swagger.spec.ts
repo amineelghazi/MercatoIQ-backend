@@ -6,6 +6,8 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthController } from "./auth/auth.controller";
 import { AuthService } from "./auth/auth.service";
+import { ClubsController } from "./clubs/clubs.controller";
+import { ClubsService } from "./clubs/clubs.service";
 import { PlayersController } from "./players/players.controller";
 import { PlayersService } from "./players/players.service";
 import { TransfersController } from "./transfers/transfers.controller";
@@ -20,6 +22,7 @@ describe("Swagger OpenAPI Document", () => {
         PlayersController,
         TransfersController,
         AnalyticsController,
+        ClubsController,
       ],
       providers: [
         AppService,
@@ -27,6 +30,7 @@ describe("Swagger OpenAPI Document", () => {
         { provide: PlayersService, useValue: {} },
         { provide: TransfersService, useValue: {} },
         { provide: AnalyticsService, useValue: {} },
+        { provide: ClubsService, useValue: {} },
       ],
     }).compile();
 
@@ -46,6 +50,7 @@ describe("Swagger OpenAPI Document", () => {
       .addTag("Players")
       .addTag("Transfers")
       .addTag("Analytics (Gold)")
+      .addTag("Clubs & Competitions")
       .build();
 
     const doc = SwaggerModule.createDocument(app, config);
@@ -63,6 +68,9 @@ describe("Swagger OpenAPI Document", () => {
     expect(doc.paths["/api/v1/analytics/scouting-u23"]?.get).toBeDefined();
     expect(doc.paths["/api/v1/analytics/ucl-vs-domestic"]?.get).toBeDefined();
     expect(doc.paths["/api/v1/analytics/super-subs"]?.get).toBeDefined();
+    expect(doc.paths["/api/v1/competitions"]?.get).toBeDefined();
+    expect(doc.paths["/api/v1/clubs"]?.get).toBeDefined();
+    expect(doc.paths["/api/v1/clubs/{id}"]?.get).toBeDefined();
 
     expect(doc.components?.schemas?.LoginDto).toBeDefined();
     expect(doc.components?.schemas?.RegisterDto).toBeDefined();

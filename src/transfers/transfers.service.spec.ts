@@ -73,6 +73,12 @@ describe('TransfersService', () => {
     expect(transfer).toEqual(mockTransfer);
   });
 
+  it('should throw NotFoundException for an invalid ObjectId', async () => {
+    await expect(service.findOne('invalid-id')).rejects.toThrow(
+      NotFoundException,
+    );
+  });
+
   it('should throw NotFoundException if transfer is not found', async () => {
     mockTransferModel.findById.mockReturnValueOnce({
       exec: jest.fn().mockResolvedValue(null),

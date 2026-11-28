@@ -47,6 +47,10 @@ async function bootstrap() {
     .addTag("Transfers", "CRUD & historique des transferts (Silver)")
     .addTag("Analytics (Gold)", "Agrégations analytiques & Modèle ML U23")
     .addTag(
+      "Clubs & Competitions",
+      "Référentiel des clubs et compétitions (Bronze)",
+    )
+    .addTag(
       "Admin & Pipeline",
       "Orchestration du pipeline Python & métriques opérationnelles",
     )

@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 import {
   SilverTransfer,
   SilverTransferDocument,
@@ -68,6 +68,10 @@ export class TransfersService {
 
   // Get one transfer by MongoDB _id
   async findOne(id: string) {
+    if (!isValidObjectId(id)) {
+      throw new NotFoundException(`Transfer #${id} not found`);
+    }
+
     const transfer = await this.transferModel.findById(id).exec();
 
     if (!transfer) {
@@ -88,6 +92,10 @@ export class TransfersService {
 
   // Update a transfer by MongoDB _id
   async update(id: string, dto: UpdateTransferDto) {
+    if (!isValidObjectId(id)) {
+      throw new NotFoundException(`Transfer #${id} not found`);
+    }
+
     const updated = await this.transferModel
       .findByIdAndUpdate(id, dto, { new: true })
       .exec();
@@ -101,6 +109,10 @@ export class TransfersService {
 
   // Delete a transfer by MongoDB _id
   async remove(id: string) {
+    if (!isValidObjectId(id)) {
+      throw new NotFoundException(`Transfer #${id} not found`);
+    }
+
     const deleted = await this.transferModel.findByIdAndDelete(id).exec();
 
     if (!deleted) {
